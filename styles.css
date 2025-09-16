@@ -8,6 +8,11 @@ html, body {
 
 .nav-bar {
     width: 100%;
+    height: 64px;
+}
+
+.nav-bar {
+    width: 100%;
     height: 64px; /* Typical nav-bar height */
     background: #000;
     display: flex;
@@ -27,34 +32,196 @@ html, body {
     display: block;
 }
 
-/* Hero Section */
+/* Minimalistic Hero Section */
 .hero {
-    height: 100vh;
-    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    position: relative;
+    margin-top: 64px;
     overflow: hidden;
-    margin-top: 64px; /* Account for fixed nav */
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: 80vh;
 }
 
 .hero-content {
+    z-index: 2;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: #C41230;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #2c3e50;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -1px;
+}
+
+.hero-highlight {
+    font-weight: 700;
+    color: #C41230;
+    display: block;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #64748b;
+    margin: 0 0 2.5rem 0;
+    max-width: 500px;
+    font-weight: 400;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-primary {
+    background: #C41230;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #C41230;
+    box-shadow: 0 4px 12px rgba(196, 18, 48, 0.2);
+}
+
+.btn-primary:hover {
+    background: #A6192E;
+    border-color: #A6192E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 18, 48, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #C41230;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #C41230;
+    transform: translateY(-2px);
+}
+
+.hero-visual {
     position: relative;
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 400px;
 }
 
-.hero-banner {
-    position: absolute;
-    top: 0;
-    left: 0;
+.hero-image {
     width: 100%;
-    height: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: float 6s ease-in-out infinite;
     object-fit: cover;
-    z-index: 1;
+}
+
+.visual-element::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+}
+
+.visual-element::after {
+    content: '�';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-10px) rotate(2deg); 
+    }
+}
+
+.visual-dots {
+    position: absolute;
+    top: 50%;
+    right: -2rem;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #C41230;
+    opacity: 0.6;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 0.6; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.2); 
+    }
 }
 
 .header {
@@ -85,16 +252,20 @@ html, body {
     max-width: 100%; 
 }
 
+/* Minimalistic Section Headers */
 .section {
-    background-color: rgb(1, 174, 174);
+    background-color: #C41230;
+    margin: 2.5rem 0 1.5rem 0;
 }
 
 .section-text {
-    color: #fff; 
-    text-align: center; 
-    padding-top: 1rem; 
-    padding-bottom: 1rem;
-    margin-top: 0.5rem;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 2rem;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 .sshd-banner {
     top: 5rem;
@@ -194,6 +365,68 @@ html, body {
     .grid-item.reverse .grid-text,
     .grid-item.reverse .grid-image {
         order: initial;
+    }
+    
+    /* Minimalistic Hero Responsive */
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .hero-visual {
+        height: 250px;
+        order: -1;
+    }
+    
+    .hero-image {
+        max-width: 300px;
+    }
+    
+    .visual-dots {
+        right: -1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .visual-element {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .visual-icon {
+        font-size: 2rem;
+    }
+    
+    .visual-dots {
+        display: none;
     }
 }
 
@@ -349,27 +582,21 @@ body {
         padding: 1rem;
     }
     
-    /* Hero Responsive */
-    .hero {
-        height: 80vh;
-        margin-top: 64px;
+    /* Responsive Section Headers */
+    .section-text {
+        font-size: 1.3rem;
+        padding: 1.2rem 1rem;
+        letter-spacing: 0.3px;
     }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
+}
+
+@media (max-width: 480px) {
+    .section-text {
         font-size: 1.1rem;
+        padding: 1rem 0.8rem;
     }
     
-    .hero-overlay {
-        padding: 2rem 1.5rem;
-        margin: 0 1rem;
-    }
-    
-    .cta-button {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+    .section {
+        margin: 2rem 0 1rem 0;
     }
 }
