@@ -27,6 +27,36 @@ html, body {
     display: block;
 }
 
+/* Hero Section */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 64px; /* Account for fixed nav */
+}
+
+.hero-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
 .header {
     background-color: #A6192E; /* SDSU Red */
     min-height: 5rem;
@@ -66,26 +96,15 @@ html, body {
     padding-bottom: 1rem;
     margin-top: 0.5rem;
 }
-
-.success-section-content{
-    display: block; 
-    overflow: hidden;
+.sshd-banner {
+    top: 5rem;
 }
 
-.success-section-content img {
-    float: left;
-    max-width: 40%;
-    max-height: 300px; 
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    object-fit: contain;
-    padding: 2rem;
+.sshd-banner-image {
+    width: 100%; 
+    height: auto; 
+    max-width: fit-content;
 }
-
-.success-section-content-description {
-    padding: 2rem;
-}
-
 /* Grid Container for Alternating Layout */
 .grid-container {
     max-width: 1200px;
@@ -328,5 +347,29 @@ body {
     
     .footer-bottom {
         padding: 1rem;
+    }
+    
+    /* Hero Responsive */
+    .hero {
+        height: 80vh;
+        margin-top: 64px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-overlay {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
     }
 }
