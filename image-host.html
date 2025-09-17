@@ -249,15 +249,15 @@
     <div class="container">
     <div class="container">
         <div class="header">
-            <h1>🖼️ Image Repository</h1>
+            <h1>SSHD Image Repository</h1>
             <p><small>Powered by Supabase</small></p>
         </div>
         
         <!-- Configuration Section (shown only when not configured) -->
         <div class="config-section" id="configSection" style="display: none;">
             <div class="upload-section">
-                <h3>🔧 Supabase Configuration</h3>
-                <p>Enter your Supabase credentials to get started:</p>
+                <h3>Supabase Configuration<br><br></h3>
+                <p>Enter your Supabase credentials to get started:<br><br></p>
                 
                 <div style="margin-bottom: 1rem;">
                     <label><strong>Supabase URL:</strong></label>
@@ -269,18 +269,7 @@
                     <input type="password" id="supabaseKey" class="config-input" placeholder="Your anon key">
                 </div>
                 
-                <button onclick="saveConfig()" class="upload-btn">💾 Save Configuration</button>
-                
-                <div class="config-instructions">
-                    <h4>📋 Setup Instructions:</h4>
-                    <ol>
-                        <li>Go to <a href="https://supabase.com" target="_blank" style="color: #C41230;">supabase.com</a> and create account</li>
-                        <li>Create new project → Get URL & anon key from <strong>Settings → API</strong></li>
-                        <li>Create table: <code>images</code> with columns: id, filename, original_name, url, created_at</li>
-                        <li>Create storage bucket: <code>newsletter-images</code> (public)</li>
-                        <li>Enter credentials above</li>
-                    </ol>
-                </div>
+                <button onclick="saveConfig()" class="upload-btn">Save Configuration</button>
             </div>
         </div>
         
