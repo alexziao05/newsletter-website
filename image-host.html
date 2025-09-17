@@ -3,119 +3,568 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Host - Hidden</title>
-    <meta name="robots" content="noindex, nofollow">
+    <title>Image Repository</title>
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
         
-        .main-content {
-            max-width: 1200px;
-            margin: 2rem auto;
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
             padding: 2rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .header {
             text-align: center;
             margin-bottom: 2rem;
             color: #C41230;
-            border-bottom: 2px solid #C41230;
-            padding-bottom: 1rem;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+        }
+        
+        .config-section, .main-app {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .upload-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .upload-zone {
+            border: 2px dashed #C41230;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: #fafafa;
+        }
+        
+        .upload-zone:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .upload-zone p {
+            font-size: 1.1rem;
+            color: #666;
         }
         
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
         }
         
         .image-item {
-            border: 1px solid #ddd;
+            background: white;
             border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            background: #fafafa;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
         
         .image-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
         }
         
-        .image-item .filename {
-            font-size: 0.8rem;
+        .image-info {
+            padding: 1rem;
+            font-size: 0.9rem;
             color: #666;
-            word-break: break-all;
+            text-align: center;
+            background-color: #fafafa;
         }
         
-        .hidden-images {
-            opacity: 0;
+        .delete-btn {
             position: absolute;
-            left: -9999px;
-            pointer-events: none;
+            top: 8px;
+            right: 8px;
+            background-color: #C41230;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .delete-btn:hover {
+            background-color: #A6192E;
+        }
+        
+        .upload-btn {
+            background-color: #C41230;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+        
+        .upload-btn:hover {
+            background-color: #A6192E;
+        }
+        
+        .upload-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .config-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .config-input:focus {
+            outline: none;
+            border-color: #C41230;
+        }
+        
+        .config-instructions {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #C41230;
+        }
+        
+        .config-instructions h4 {
+            color: #C41230;
+            margin-bottom: 1rem;
+        }
+        
+        .config-instructions ol {
+            margin-left: 1.2rem;
+        }
+        
+        .config-instructions li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        .config-instructions code {
+            background-color: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .settings-btn {
+            float: right;
+            background-color: #666;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        
+        .settings-btn:hover {
+            background-color: #555;
+        }
+        
+        .loading-message, .error-message, .empty-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin: 2rem;
+            border-radius: 8px;
+        }
+        
+        .loading-message {
+            background-color: #e7f3ff;
+            color: #0066cc;
+        }
+        
+        .error-message {
+            background-color: #fff0f0;
+            color: #C41230;
+        }
+        
+        .empty-message {
+            background-color: #f8f9fa;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .upload-zone {
+                padding: 2rem 1rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Main Content -->
-    <div class="main-content">
+    <div class="container">
+    <div class="container">
         <div class="header">
-            <h1>🖼️ Image Host Repository</h1>
-            <p>Invisible image hosting for SDSU Newsletter Website</p>
+            <h1>🖼️ Image Repository</h1>
+            <p><small>Powered by Supabase</small></p>
         </div>
         
-        <div class="image-grid">
-            <!-- Add your hosted images here -->
-            <div class="image-item">
-                <img src="hosted_images/1.png" alt="Hero Image" onerror="this.style.display='none'">
-            </div>
-            
-            <div class="image-item">
-                <img src="hosted_images/2.png" alt="Newsletter Hero" onerror="this.style.display='none'">
-            </div>
-
-            <div class="image-item">
-                <img src="hosted_images/3.png" alt="Newsletter Hero" onerror="this.style.display='none'">
-            </div>
-            
-            <!-- Add more images as needed -->
-            <div class="image-item">
-                <div style="background: #f0f0f0; height: 150px; display: flex; align-items: center; justify-content: center; color: #999; border-radius: 4px;">
-                    <span>+ Add New Image</span>
+        <!-- Configuration Section (shown only when not configured) -->
+        <div class="config-section" id="configSection" style="display: none;">
+            <div class="upload-section">
+                <h3>🔧 Supabase Configuration</h3>
+                <p>Enter your Supabase credentials to get started:</p>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label><strong>Supabase URL:</strong></label>
+                    <input type="text" id="supabaseUrl" class="config-input" placeholder="https://your-project.supabase.co">
                 </div>
-                <div class="filename">Placeholder for new images</div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label><strong>Supabase Anon Key:</strong></label>
+                    <input type="password" id="supabaseKey" class="config-input" placeholder="Your anon key">
+                </div>
+                
+                <button onclick="saveConfig()" class="upload-btn">💾 Save Configuration</button>
+                
+                <div class="config-instructions">
+                    <h4>📋 Setup Instructions:</h4>
+                    <ol>
+                        <li>Go to <a href="https://supabase.com" target="_blank" style="color: #C41230;">supabase.com</a> and create account</li>
+                        <li>Create new project → Get URL & anon key from <strong>Settings → API</strong></li>
+                        <li>Create table: <code>images</code> with columns: id, filename, original_name, url, created_at</li>
+                        <li>Create storage bucket: <code>newsletter-images</code> (public)</li>
+                        <li>Enter credentials above</li>
+                    </ol>
+                </div>
             </div>
         </div>
         
-        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin-top: 2rem;">
-            <h3>📝 Instructions:</h3>
-            <ul style="text-align: left;">
-                <li>Add new images to the <code>hosted_images/</code> folder</li>
-                <li>Add corresponding image items to this grid</li>
-                <li>Images are accessible via direct URL</li>
-                <li>This page serves as an image repository for the newsletter</li>
-                <li>Update filenames to match actual image names</li>
-            </ul>
+        <!-- Main App (shown when configured) -->
+        <div class="main-app" id="mainApp">
+            <div class="upload-section">
+                <button onclick="showConfig()" class="settings-btn">Settings</button>
+                <div style="clear: both;"></div>
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                        <p>Click to upload images or drag & drop here</p>
+                        <input type="file" id="fileInput" name="images[]" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <button type="submit" class="upload-btn">Upload Images</button>
+                </form>
+            </div>
+            
+            <!-- Image Grid -->
+            <div class="image-grid" id="imageGrid">
+                <div class="loading-message">
+                    🔄 Loading images...
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Hidden Images Section - These load invisibly for hosting -->
-    <div class="hidden-images">
-        <!-- Add images here that you want to host invisibly -->
-        <img src="hosted_images/1.png" alt="Hidden Image 1">
-        <img src="hosted_images/2.png" alt="Hidden Image 2">
-        <img src="hosted_images/3.png" alt="Hidden Image 3">
-        <!-- Add more hidden images as needed -->
-    </div>
+    <script>
+        // Supabase configuration
+        let supabase = null;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkConfiguration();
+        });
+        
+        function checkConfiguration() {
+            const url = localStorage.getItem('supabase_url');
+            const key = localStorage.getItem('supabase_key');
+            
+            if (url && key) {
+                initializeSupabase(url, key);
+                document.getElementById('configSection').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                loadImages();
+            } else {
+                document.getElementById('configSection').style.display = 'block';
+                document.getElementById('mainApp').style.display = 'none';
+            }
+        }
+        
+        function initializeSupabase(url, key) {
+            supabase = window.supabase.createClient(url, key);
+        }
+        
+        function saveConfig() {
+            const url = document.getElementById('supabaseUrl').value.trim();
+            const key = document.getElementById('supabaseKey').value.trim();
+            
+            if (!url || !key) {
+                alert('Please enter both URL and key');
+                return;
+            }
+            
+            localStorage.setItem('supabase_url', url);
+            localStorage.setItem('supabase_key', key);
+            
+            alert('Configuration saved! Reloading...');
+            location.reload();
+        }
+        
+        function showConfig() {
+            document.getElementById('configSection').style.display = 'block';
+            document.getElementById('mainApp').style.display = 'none';
+            
+            // Pre-fill current values
+            document.getElementById('supabaseUrl').value = localStorage.getItem('supabase_url') || '';
+            document.getElementById('supabaseKey').value = localStorage.getItem('supabase_key') || '';
+        }
+        
+        // Handle form submission
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            uploadImages();
+        });
+        
+        // Handle file selection
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const files = this.files;
+            if (files.length > 0) {
+                document.querySelector('.upload-zone p').textContent = `${files.length} file(s) selected`;
+            }
+        });
+        
+        // Drag and drop functionality
+        const uploadZone = document.querySelector('.upload-zone');
+        
+        uploadZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.background = '#f0f0f0';
+        });
+        
+        uploadZone.addEventListener('dragleave', function(e) {
+            this.style.background = '';
+        });
+        
+        uploadZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.background = '';
+            
+            const files = e.dataTransfer.files;
+            document.getElementById('fileInput').files = files;
+            
+            if (files.length > 0) {
+                document.querySelector('.upload-zone p').textContent = `${files.length} file(s) ready to upload`;
+            }
+        });
+        
+        async function uploadImages() {
+            const files = document.getElementById('fileInput').files;
+            
+            if (files.length === 0) {
+                alert('Please select files to upload');
+                return;
+            }
+            
+            if (!supabase) {
+                alert('Supabase not configured. Please check settings.');
+                return;
+            }
+            
+            const uploadBtn = document.querySelector('.upload-btn');
+            uploadBtn.textContent = 'Uploading...';
+            uploadBtn.disabled = true;
+            
+            let successCount = 0;
+            
+            for (let file of files) {
+                try {
+                    // Generate unique filename
+                    const fileName = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}_${file.name}`;
+                    
+                    // Upload to Supabase storage
+                    const { data: uploadData, error: uploadError } = await supabase.storage
+                        .from('newsletter-images')
+                        .upload(fileName, file);
+                        
+                    if (uploadError) {
+                        console.error('Upload error:', uploadError);
+                        alert(`Failed to upload ${file.name}: ${uploadError.message}`);
+                        continue;
+                    }
+                    
+                    // Get public URL
+                    const { data: urlData } = supabase.storage
+                        .from('newsletter-images')
+                        .getPublicUrl(fileName);
+                    
+                    // Save metadata to database
+                    const { error: dbError } = await supabase
+                        .from('images')
+                        .insert({
+                            filename: fileName,
+                            original_name: file.name,
+                            url: urlData.publicUrl,
+                            file_size: file.size
+                        });
+                        
+                    if (dbError) {
+                        console.error('Database error:', dbError);
+                        alert(`Failed to save ${file.name} metadata: ${dbError.message}`);
+                        continue;
+                    }
+                    
+                    successCount++;
+                    
+                } catch (error) {
+                    console.error('Unexpected error:', error);
+                    alert(`Unexpected error uploading ${file.name}`);
+                }
+            }
+            
+            // Reset form
+            document.getElementById('uploadForm').reset();
+            document.querySelector('.upload-zone p').textContent = '📁 Click to upload images or drag & drop here';
+            
+            uploadBtn.textContent = 'Upload Images';
+            uploadBtn.disabled = false;
+            
+            if (successCount > 0) {
+                alert(`Successfully uploaded ${successCount} image(s)!`);
+                loadImages(); // Refresh the grid
+            }
+        }
+        
+        async function loadImages() {
+            if (!supabase) return;
+            
+            try {
+                const { data: images, error } = await supabase
+                    .from('images')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                    
+                if (error) {
+                    console.error('Load error:', error);
+                    document.getElementById('imageGrid').innerHTML = `
+                        <div class="error-message">
+                            Error loading images: ${error.message}
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const grid = document.getElementById('imageGrid');
+                
+                if (images.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-message">
+                            No images uploaded yet. Upload some images to get started!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                grid.innerHTML = '';
+                
+                images.forEach(image => {
+                    const item = document.createElement('div');
+                    item.className = 'image-item';
+                    item.innerHTML = `
+                        <img src="${image.url}" alt="${image.original_name}" loading="lazy">
+                        <div class="image-info">${image.original_name}</div>
+                        <button class="delete-btn" onclick="deleteImage('${image.id}', '${image.filename}')">&times;</button>
+                    `;
+                    grid.appendChild(item);
+                });
+                
+            } catch (error) {
+                console.error('Unexpected error loading images:', error);
+                document.getElementById('imageGrid').innerHTML = `
+                    <div class="error-message">
+                        Unexpected error loading images
+                    </div>
+                `;
+            }
+        }
+        
+        async function deleteImage(id, filename) {
+            if (!confirm('Delete this image?')) return;
+            
+            if (!supabase) {
+                alert('Supabase not configured');
+                return;
+            }
+            
+            try {
+                // Delete from storage
+                const { error: storageError } = await supabase.storage
+                    .from('newsletter-images')
+                    .remove([filename]);
+                
+                if (storageError) {
+                    console.error('Storage delete error:', storageError);
+                }
+                
+                // Delete from database
+                const { error: dbError } = await supabase
+                    .from('images')
+                    .delete()
+                    .eq('id', id);
+                
+                if (dbError) {
+                    alert(`Failed to delete: ${dbError.message}`);
+                    return;
+                }
+                
+                loadImages(); // Refresh the grid
+                
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('Failed to delete image');
+            }
+        }
+    </script>
 </body>
 </html>
