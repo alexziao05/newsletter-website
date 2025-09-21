@@ -3,7 +3,239 @@ html, body {
     padding: 0;
     box-sizing: border-box;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow on all elements */
+* {
+    max-width: 100%;
+}
+
+/* Specific overflow prevention for text elements */
+h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Ensure images and media never overflow */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Scroll Animation Styles */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in.fly-away {
+    opacity: 0;
+    transform: translateY(60px) scale(0.8);
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-left.fly-away {
+    opacity: 0;
+    transform: translateX(-100px) translateY(50px) rotate(-10deg);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right.fly-away {
+    opacity: 0;
+    transform: translateX(100px) translateY(50px) rotate(10deg);
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-up.fly-away {
+    opacity: 0;
+    transform: translateY(120px) scale(0.7);
+}
+
+/* Additional fly-away variations for more variety */
+.grid-item:nth-child(odd).fly-away {
+    transform: translateX(-120px) translateY(60px) rotate(-15deg) scale(0.6);
+}
+
+.grid-item:nth-child(even).fly-away {
+    transform: translateX(120px) translateY(60px) rotate(15deg) scale(0.6);
+}
+
+.resource-item:nth-child(odd).fly-away {
+    transform: translateX(-100px) translateY(80px) rotate(-12deg) scale(0.7);
+}
+
+.resource-item:nth-child(even).fly-away {
+    transform: translateX(100px) translateY(80px) rotate(12deg) scale(0.7);
+}
+
+.calendar-item.fly-away {
+    transform: translateY(120px) translateX(-50px) rotate(-8deg) scale(0.5);
+}
+
+.section.fly-away {
+    transform: translateY(150px) scale(0.4);
+}
+
+/* Faster transition for fly-away effect */
+.fly-away {
+    transition: opacity 0.6s ease-in, transform 0.6s ease-in !important;
+}
+
+/* Enhanced fly-away effects with blur and scaling */
+@keyframes flyAwayDramatic {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+    }
+    50% {
+        opacity: 0.5;
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateY(100px) translateX(var(--fly-x, 0px)) rotate(var(--fly-rotation, 0deg)) scale(0.3);
+    }
+}
+
+/* Apply dramatic animation to flying elements */
+.fly-away-dramatic {
+    animation: flyAwayDramatic 0.8s ease-in forwards;
+}
+
+/* Staggered animation delays for multiple elements */
+.fade-in:nth-child(1) { transition-delay: 0.1s; }
+.fade-in:nth-child(2) { transition-delay: 0.2s; }
+.fade-in:nth-child(3) { transition-delay: 0.3s; }
+.fade-in:nth-child(4) { transition-delay: 0.4s; }
+.fade-in:nth-child(5) { transition-delay: 0.5s; }
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .fade-in-left,
+    .fade-in-right,
+    .fade-in-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Enhanced animations for better performance */
+.fade-in,
+.fade-in-left,
+.fade-in-right,
+.fade-in-up {
+    will-change: opacity, transform;
+}
+
+/* Hero section special animations */
+.hero-content {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: heroFadeIn 1.2s ease-out 0.3s forwards;
+}
+
+.hero-visual {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+    animation: heroSlideIn 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes heroFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Mobile-first improvements */
+.btn-primary,
+.btn-secondary {
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+}
+
+/* Ensure containers don't overflow */
+.hero-container,
+.grid-container,
+.calendar-container,
+.footer-content {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.btn-primary:focus,
+.btn-secondary:focus {
+    outline: 2px solid #A6192E;
+    outline-offset: 2px;
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+    transform: translateY(1px);
 }
 
 .nav-bar {
@@ -398,6 +630,7 @@ html, body {
     max-height: 300px; 
     object-fit: contain;
     display: block;
+    border-radius: 12px;
 }
 
 .resource-item-description {
@@ -631,6 +864,46 @@ html, body {
         text-align: center;
     }
     
+    .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        max-width: 100%;
+        line-height: 1.5;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        min-height: 48px; /* Touch-friendly size */
+    }
+    
+    /* Body content improvements */
+    body {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Better container spacing */
+    .hero-container,
+    .grid-container,
+    .calendar-container {
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+    
     .hero-content {
         order: 2;
     }
@@ -666,20 +939,24 @@ html, body {
     }
     
     .section-text {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.3;
+        padding: 1rem 1.5rem;
     }
     
     /* Grid Items */
     .grid-container {
         padding: 0 1rem;
+        gap: 2rem;
     }
     
     .grid-item {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem;
+        padding: 1.5rem 1rem;
         gap: 1.5rem;
         max-width: 100%;
+        margin-bottom: 1.5rem;
     }
     
     .grid-image {
@@ -692,15 +969,25 @@ html, body {
         width: 100%;
         max-width: 300px;
         height: auto;
+        border-radius: 8px;
     }
     
     .grid-text {
         order: 2;
         width: 100%;
+        padding: 0 0.5rem;
     }
     
     .grid-text h3 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    .grid-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
     }
     
     /* Calendar */
@@ -720,18 +1007,39 @@ html, body {
     /* Resource Items */
     .resource-item {
         flex-direction: column;
-        text-align: center;
-        padding: 1.5rem;
+        text-align: left;
+        padding: 2rem 1rem;
         gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .resource-item-description {
+        width: 100%;
+    }
+    
+    .resource-item-description h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #A6192E;
     }
     
     .resource-item img {
         max-width: 100%;
         max-height: 200px;
+        border-radius: 12px;
+        margin-bottom: 1rem;
     }
     
     .resource-description {
         font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    /* See More Events Button */
+    .see-more-container {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 0 1rem;
     }
     
     /* Footer */
@@ -762,10 +1070,85 @@ html, body {
 
 @media (max-width: 480px) {
     /* Extra small screens */
-    .hero-title {
-        font-size: 2rem;
+    .nav-bar {
+        padding: 0 0.5rem;
+        height: 52px;
     }
     
+    .nav-logo {
+        height: 36px;
+    }
+    
+    .hero {
+        margin-top: 52px;
+        padding: 1.5rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 0.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+    
+    .section {
+        padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+    }
+    
+    .section-text {
+        font-size: 1.5rem;
+        padding: 0.8rem 1rem;
+    }
+    
+    .grid-item {
+        padding: 1rem 0.5rem;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .grid-text h3 {
+        font-size: 1.2rem;
+    }
+    
+    .grid-text p {
+        font-size: 0.9rem;
+    }
+    
+    .resource-item {
+        padding: 1.5rem 0.5rem;
+        gap: 1rem;
+    }
+    
+    .resource-item-description h3 {
+        font-size: 1.3rem;
+    }
+    
+    .resource-description {
+        font-size: 0.9rem;
+    }
+    
+    .calendar-item {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
     .section-text {
         font-size: 1.75rem;
     }
@@ -780,6 +1163,59 @@ html, body {
     
     .grid-item {
         padding: 1rem;
+    }
+}
+
+/* Extra small screens - prevent horizontal scrolling */
+@media (max-width: 375px) {
+    .nav-bar {
+        padding: 0 0.5rem;
+    }
+    
+    .hero-container,
+    .grid-container,
+    .calendar-container {
+        padding: 0 0.5rem;
+        margin: 0;
+    }
+    
+    .section {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+    }
+    
+    .grid-item {
+        padding: 1rem 0.25rem;
+    }
+    
+    .resource-item {
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Very small screens */
+    .nav-bar {
+        padding: 0 0.25rem;
+    }
+    
+    .nav-logo {
+        height: 32px;
+        margin-right: 8px;
+    }
+    
+    .hero-container,
+    .grid-container,
+    .calendar-container {
+        padding: 0 0.25rem;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-text {
+        font-size: 1.3rem;
+        padding: 0.5rem;
     }
 }
 

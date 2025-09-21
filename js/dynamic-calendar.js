@@ -109,6 +109,25 @@ class DynamicCalendar {
         this.calendarContainer.innerHTML = calendarHTML;
         
         console.log('📅 Calendar grid rendered');
+        
+        // Trigger animations for the newly loaded content
+        this.triggerAnimations();
+    }
+    
+    // Trigger scroll animations for the newly loaded content
+    triggerAnimations() {
+        // Dispatch custom event to notify animation system
+        const event = new CustomEvent('dynamicContentLoaded', {
+            detail: { type: 'calendar', container: this.calendarContainer }
+        });
+        document.dispatchEvent(event);
+        
+        // Also directly trigger animations if the system is available
+        if (window.ScrollAnimations && window.ScrollAnimations.addAnimationsToDynamicContent) {
+            setTimeout(() => {
+                window.ScrollAnimations.addAnimationsToDynamicContent();
+            }, 100);
+        }
     }
     
     // Generate calendar HTML

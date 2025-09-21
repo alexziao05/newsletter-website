@@ -46,6 +46,25 @@ class DynamicGrid {
             const gridItem = this.createGridItem(announcement);
             this.container.appendChild(gridItem);
         });
+        
+        // Trigger animation system for newly added content
+        this.triggerAnimations();
+    }
+    
+    // Trigger scroll animations for the newly loaded content
+    triggerAnimations() {
+        // Dispatch custom event to notify animation system
+        const event = new CustomEvent('dynamicContentLoaded', {
+            detail: { type: 'announcements', container: this.container }
+        });
+        document.dispatchEvent(event);
+        
+        // Also directly trigger animations if the system is available
+        if (window.ScrollAnimations && window.ScrollAnimations.addAnimationsToDynamicContent) {
+            setTimeout(() => {
+                window.ScrollAnimations.addAnimationsToDynamicContent();
+            }, 100);
+        }
     }
     
     // Create a single grid item element

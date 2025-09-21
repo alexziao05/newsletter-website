@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>SDSU Student Success Newsletter</title>
 </head>
@@ -57,11 +59,8 @@
         
         <!-- Fallback/Static Grid Items (shown if dynamic loading fails) -->
         <div class="static-grid-items" style="display: none;">
-            <!-- Grid Item 1: Image left, text right -->
+            <!-- Grid Item 1: Text only -->
             <div class="grid-item">
-                <div class="grid-image">
-                    <img src="assets/1.png" alt="Announcement 1">
-                </div>
                 <div class="grid-text">
                     <h3>CSSE Open House</h3>
                     <p>Meet your advisors & support teams. Learn about study abroad, internships, tutoring & more. Connect with peers, grab a snack, and enter the raffle!</p>
@@ -73,6 +72,14 @@
 
             <!-- Additional static items... -->
         </div>
+    </div>
+    
+    <!-- See More Button for Announcements -->
+    <div class="see-more-container" style="text-align: center; margin: 2rem 0;">
+        <a href="events.html" class="btn-secondary">
+            <span class="btn-icon">📅</span>
+            See More Events
+        </a>
     </div>
 
     <div class="section" id="calendar-section" style="display: none;">
@@ -114,10 +121,12 @@
             </div>
     
     <div class="resource-item">
-        <img src="assets/sdsu_safe.jpg" alt="SDSU Safe" class="resource-image">
-        <p class="resource-description">
-            All SDSU students are encouraged to download SDSU Safe, a free phone-based app to promote personal safety both on and off campus. The app contains information about ways to easily report crime tips and information about incidents, and you can use the app to have a friend track your movement between locations. More information, and links to download for Apple and Android devices, are available online.
-        </p>
+        <div class="resource-item-description">
+            <h3>SDSU Safe</h3>
+            <p class="resource-description">
+                All SDSU students are encouraged to download SDSU Safe, a free phone-based app to promote personal safety both on and off campus. The app contains information about ways to easily report crime tips and information about incidents, and you can use the app to have a friend track your movement between locations. More information, and links to download for Apple and Android devices, are available online.
+            </p>
+        </div>
     </div>
 
     <div class="section">
@@ -125,12 +134,14 @@
     </div>
 
     <div class="resource-item">
-        <img src="assets/sshd.jpg" alt="SSHD" class="resource-image">
-        <p class="resource-description">
-            <b>We are here to help!</b> <br><br>
-            Need help? The Student Success Help Desk is here to help you find the office or service that can answer your questions or concerns. <br><br> Connect with us through phone, Zoom or email.
-            <br><br>Available Monday through Friday from 9:00 a.m. to 4:00 p.m.
-        </p>
+        <div class="resource-item-description">
+            <h3>Student Success Help Desk</h3>
+            <p class="resource-description">
+                <b>We are here to help!</b> <br><br>
+                Need help? The Student Success Help Desk is here to help you find the office or service that can answer your questions or concerns. <br><br> Connect with us through phone, Zoom or email.
+                <br><br>Available Monday through Friday from 9:00 a.m. to 4:00 p.m.
+            </p>
+        </div>
     </div>
 
     <div class="section">
@@ -201,5 +212,8 @@
     <script src="js/dynamic-grid.js"></script>
     <script src="js/dynamic-calendar.js"></script>
     <script src="js/dynamic-resources.js"></script>
+    
+    <!-- Scroll Animations -->
+    <script src="js/scroll-animations.js"></script>
 </body>
 </html>
