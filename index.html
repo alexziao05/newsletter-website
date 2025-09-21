@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>SDSU Student Success Newsletter</title>
 </head>
 
 <body>    
@@ -13,36 +11,38 @@
         <!-- Add nav links or content here -->
     </div>
 
-    <!-- Minimalistic Hero Section -->
+    <!-- Professional Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">Student Success Newsletter</div>
+                <div class="hero-badge">
+                    <span class="badge-icon">📰</span>
+                    Student Success Newsletter
+                </div>
                 
                 <h1 class="hero-title">
-                    Stay Connected<br>
+                    Stay Connected
                     <span class="hero-highlight">Stay Informed</span>
                 </h1>
                 
                 <p class="hero-subtitle">
-                    Your monthly source for academic resources, student highlights, 
-                    campus events, and success stories from the SDSU community.
+                    Resources, events, and opportunities for SDSU students.
                 </p>
                 
                 <div class="hero-actions">
-                    <a href="#announcements" class="btn-primary">Read Latest Announcement</a>
-                    <!-- <a href="#subscribe" class="btn-secondary">Subscribe Now</a> -->
+                    <a href="#announcements" class="btn-primary">
+                        <span class="btn-icon">🚀</span>
+                        Get Started
+                    </a>
+                    <a href="#calendar-section" class="btn-secondary">
+                        <span class="btn-icon">📅</span>
+                        View Events
+                    </a>
                 </div>
             </div>
             
             <div class="hero-visual">
-                <img src="assets/hero-image.png" alt="SDSU Student Success Newsletter" class="hero-image">
-                <div class="visual-dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-            </div>
+                <img src="assets/hero-image.png" alt="SDSU Student Success" class="hero-image">
             </div>
         </div>
     </section>
@@ -51,147 +51,67 @@
         <h2 class="section-text">Announcements</h2>
     </div>
 
-    <div class="grid-container">
-        <!-- Grid Item 1: Image left, text right -->
-        <div class="grid-item">
-            <div class="grid-image">
-                <img src="assets/1.png" alt="Announcement 1">
+        <div class="grid-container" id="dynamic-announcements">
+        <!-- Dynamic content will be loaded here -->
+        <!-- Static content below will be shown as fallback or alongside dynamic content -->
+        
+        <!-- Fallback/Static Grid Items (shown if dynamic loading fails) -->
+        <div class="static-grid-items" style="display: none;">
+            <!-- Grid Item 1: Image left, text right -->
+            <div class="grid-item">
+                <div class="grid-image">
+                    <img src="assets/1.png" alt="Announcement 1">
+                </div>
+                <div class="grid-text">
+                    <h3>CSSE Open House</h3>
+                    <p>Meet your advisors & support teams. Learn about study abroad, internships, tutoring & more. Connect with peers, grab a snack, and enter the raffle!</p>
+                    <p>📆 September 16</p> 
+                    <p>� 10am–2pm</p>
+                    <p>📍 Walkway between EIS & Engineering Building</p>
+                </div>
             </div>
-            <div class="grid-text">
-                <h3>CSSE Open House</h3>
-                <p>Meet your advisors & support teams. Learn about study abroad, internships, tutoring & more. Connect with peers, grab a snack, and enter the raffle!</p>
-                <p>📆 September 16</p> 
-                <p>🕙 10am–2pm</p>
-                <p>📍 Walkway between EIS & Engineering Building</p>
-            </div>
-        </div>
 
-        <!-- Grid Item 2: Text left, image right -->
-        <div class="grid-item reverse">
-            <div class="grid-text">
-                <h3>Disney Programs</h3>
-                <p>Stop by Disney’s table to connect with recruiters and learn about internships and full-time opportunities across The Walt Disney Company. This is your chance to ask questions, hear about upcoming application timelines, and make a strong first impression before the Fall Career Fair.</p>
-                <p>In-person</p>
-                <p>📍 Room Career Services Main Office - Room SSE 1200</p>
-                <p>📆 Tue, Sep 16 · 2 PM-4 PM PDT</p>
-
-            </div>
-            <div class="grid-image">
-                <img src="assets/2.webp" alt="Announcement 2">
-            </div>
-        </div>
-
-        <!-- Grid Item 3: Image left, text right -->
-        <div class="grid-item">
-            <div class="grid-image">
-                <img src="assets/3.png" alt="Announcement 3">
-            </div>
-            <div class="grid-text">
-                <h3>Talk it Out</h3>
-                <p>Feeling stressed? Just need to talk with someone? Counselors from C&PS provide confidential support to SDSU students on a drop-in basis through the Talk It Out program.</p>
-                <p>Meet one-on-one with a counselor for 15-20 minutes to get perspective, ask questions, and learn about strategies and resources to address your concerns. Unlike psychotherapy, Talk It Out allows you to speak with a counselor informally to get their professional guidance without an appointment, much like visiting a professor's office hours.</p>
-                <p>📆 Thursday, September 18, 2025. 11:59 AM - 2:00 PM</p>
-                <p>📍 Join Zoom Meeting: <a href="https://SDSU.zoom.us/j/89893973235">https://SDSU.zoom.us/j/89893973235</a></p>
-                <p>💻 Meeting ID: 898 9397 3235 (repeating event)</p>
-            </div>
-        </div>
-
-        <!-- Grid Item 4: Text left, image right -->
-        <div class="grid-item reverse">
-            <div class="grid-text">
-                <h3>Period Pop-ups</h3>
-                <p>Quick! Does anyone have a tampon?! Worry not, we are here for you. The Basic Needs Center, Well-being & Health Promotion, and the Women’s Resource Center presents, Period Pop-Ups! Stop by our pop-up table and pick up some free period products, make a heat pack, and resources. We’ll be tabling all throughout the semester at the Rose Garden & Centennial Walkway. See you there!</p>
-                <p>📆 Thursday, September 18, 2025. 12:00 PM - 2:00 PM</p>
-                <p>📍 Hall Rose Garden between the Music building and the Library</p>
-            </div>
-            <div class="grid-image">
-                <img src="assets/4.png" alt="Announcement 2">
-            </div>
-        </div>
-
-        <!-- Grid Item 3: Image left, text right -->
-        <div class="grid-item">
-            <div class="grid-image">
-                <img src="assets/8.png" alt="Announcement 3">
-            </div>
-            <div class="grid-text">
-                <h3>28th annual Family Weekend</h3>
-                <p>Family Weekend is in the fall semester and celebrates SDSU students, families and friends! It invites parents and family supporters to get a glimpse into their student’s life at SDSU. It is one of SDSU’s most long-standing traditions and brings thousands of students, parents and family supporters and alumni together. Several events are hosted throughout the weekend specifically for attendees. The signature events have included a picnic, brunch and a football tailgate.</p>
-                <p>📆 Friday, October 3 and Saturday, October 4, 2025</p>
-                <p>📍 San Diego State University Campus</p>
-            </div>
-        </div>
-
-        <!-- Grid Item 4: Text left, image right -->
-        <div class="grid-item reverse">
-            <div class="grid-text">
-                <h3>Career Services Workshop</h3>
-                <p>Do you need help getting started with your resume? Join us as we go over the basic structure of a resume and how to construct a bullet that markets you as the ideal applicant!</p>
-                <p>Register for this in-person event on <a href="https://sdsu.joinhandshake.com/events/1804188/share_preview">Handshake</a></p>
-                <p>📆 Thursday, September 18, 2025. 12:00 PM - 1:00 PM</p>
-                <p>📍 Career Services Main Office - Room SSE 1200</p>
-
-            </div>
-            <div class="grid-image">
-                <img src="assets/5.png" alt="Announcement 2">
-            </div>
-        </div>
-
-        <!-- Grid Item 3: Image left, text right -->
-        <div class="grid-item">
-            <div class="grid-image">
-                <img src="assets/6.png" alt="Announcement 3">
-            </div>
-            <div class="grid-text">
-                <h3>Fowler College of Business Career Fair</h3>
-                <p>This event is a great opportunity for all SDSU students and alumni to connect with a diverse array of employers, from corporations to nonprofits, over business-related internships, part-time and full-time positions. This career fair is open to all majors.</p>
-                <p>Students and alumni may register through <a href="https://app.joinhandshake.com/career_fairs/41f58753-a1ed-4f1e-890f-7558f3c93415/student_preview">Handshake</a></p>
-                <p>📆 Thursday, September 25, 2025. 10:00 AM - 2:00 PM</p>
-                <p>📍 Montezuma Hall</p>
-            </div>
-        </div>
-
-        <!-- Grid Item 4: Text left, image right -->
-        <div class="grid-item reverse">
-            <div class="grid-text">
-                <h3>Careers in Sciences</h3>
-                <p>Join the College of Sciences Student Success Center for a panel and networking event with professionals across several STEM fields!</p>
-                <p>Wednesday, September 24, 2025</p>
-                <p>Templo Mayor</p>
-                <p>Panel 1-2pm, Networking 2-3pm</p>
-                <p>Scan the QR Code to register!!</p>
-            </div>
-            <div class="grid-image">
-                <img src="assets/7.png" alt="Announcement 2">
-            </div>
+            <!-- Additional static items... -->
         </div>
     </div>
 
-    <div class="section">
-        <h2 class="section-text">September Academic Calendar</h2>
+    <div class="section" id="calendar-section" style="display: none;">
+        <h2 class="section-text">Academic Calendar</h2>
     </div>
 
-    <div class="calendar-item">
-        <h3><u>September 20</u></h3>
-        <p>Tuition installment plan due date. Review the <a href="https://bursar.sdsu.edu/billing/installment-plans">Installment Plans</a> web page for more information.</p>
-    </div>
+    <div class="calendar-container" id="dynamic-calendar" style="display: none;">
+        <!-- Dynamic calendar content will be loaded here -->
+        <!-- Static content below will be shown as fallback -->
+        
+        <div class="static-calendar-items" style="display: none;">
+            <div class="calendar-item">
+                <h3><u>September 20</u></h3>
+                <p>Tuition installment plan due date. Review the <a href="https://bursar.sdsu.edu/billing/installment-plans">Installment Plans</a> web page for more information.</p>
+            </div>
 
-    <div class="calendar-item">
-        <h3><u>September 22</u></h3>
-        <p>Census.</p>
-    </div>
+            <div class="calendar-item">
+                <h3><u>September 22</u></h3>
+                <p>Census.</p>
+            </div>
 
-    <div class="calendar-item">
-        <h3><u>September 22</u></h3>
-        <p>Last day for students to submit a <a href="https://registrar.sdsu.edu/students/academic_status/withdrawal-late-schedule-adjustment">Petition for Late Schedule Adjustment</a> requesting a fall 2025 course withdrawal without a "W" on the transcript. Any approved requests received after this date will result in a "W" on the transcript.</p>
+            <div class="calendar-item">
+                <h3><u>September 22</u></h3>
+                <p>Last day for students to submit a <a href="https://registrar.sdsu.edu/students/academic_status/withdrawal-late-schedule-adjustment">Petition for Late Schedule Adjustment</a> requesting a fall 2025 course withdrawal without a "W" on the transcript. Any approved requests received after this date will result in a "W" on the transcript.</p>
+            </div>
+        </div>
     </div>
 
     <div class="spacer" style="height: 2rem;">
     </div>
 
-    <div class="section">
-        <h2 class="section-text">Student Success Resources</h2>
-    </div>
+    <div class="resources-container" id="dynamic-resources" style="display: none;">
+        <!-- Dynamic resource sections will be loaded here -->
+        <!-- Static content below will be shown as fallback -->
+        
+        <div class="static-resource-sections" style="display: none;">
+            <div class="section">
+                <h2 class="section-text">Student Success Resources</h2>
+            </div>
     
     <div class="resource-item">
         <img src="assets/sdsu_safe.jpg" alt="SDSU Safe" class="resource-image">
@@ -228,6 +148,8 @@
             <br><br>
             Avoid the last-minute stress by taking charge of your academic path during Advising Month!
         </p>
+    </div>
+        </div>
     </div>
 
     <footer class="footer">
@@ -272,5 +194,12 @@
             <p>&copy; 2025 San Diego State University. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- Scripts for Dynamic Content -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/dynamic-grid.js"></script>
+    <script src="js/dynamic-calendar.js"></script>
+    <script src="js/dynamic-resources.js"></script>
 </body>
 </html>
