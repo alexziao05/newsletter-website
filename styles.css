@@ -257,11 +257,45 @@ html {
     padding: 0 32px;
 }
 .nav-logo {
-    height: 48px;
+    height: 40px;
     width: auto;
     margin-right: 24px;
     object-fit: contain;
-    display: block;
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(166, 25, 46, 0.2);
+    color: #A6192E;
+}
+
+.nav-link.active {
+    background: #A6192E;
+    color: #ffffff;
 }
 
 /* Professional Hero Section */

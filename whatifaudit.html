@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What If Audit Guide - SDSU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding-top: 80px; /* Space for nav-bar */
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            margin-top: 7rem;
+        }
+
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, #A6192E 0%, #8B1428 100%);
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(166, 25, 46, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #A6192E 0%, #8B1428 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .step-image {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .faq-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #A6192E;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid #A6192E;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            border: 1px solid #c8e6c9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .important-note .icon {
+            color: #4caf50;
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .step-card {
+                padding: 1.5rem;
+            }
+            
+            .step-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="nav-bar">
+        <div class="nav-logo">
+            <img src="assets/sdsu_banner.jpg" alt="SDSU Logo">
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="guides.html" class="nav-link">Guides</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>What If Audit Guide</h1>
+            <p>Learn how to explore different majors and minors using SDSU's "What If" audit tool</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <div class="faq-title">
+                <span>❓</span> What is a "What If" Audit?
+            </div>
+            <div class="faq-answer">
+                "What If" audits are degree evaluations run under a different major. This means you can change the major or minor in which your coursework is evaluated and the results will display the remaining requirements you would have if you were to change your major or minor.
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <div class="faq-title">
+                <span>⚠️</span> Does running my "What If Audit" declare or change my major?
+            </div>
+            <div class="faq-answer">
+                <strong>NO.</strong> This tool is designed to help undeclared students OR students who want to switch majors or declare a minor, to see what course requirements they must complete.
+                <div class="important-note">
+                    <span class="icon">✅</span>
+                    <strong>Important:</strong> This does not declare your major or minor.
+                </div>
+            </div>
+        </div>
+
+        <!-- Step-by-Step Guide -->
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h2 class="step-title">Open your degree evaluation in your my.sdsu account</h2>
+            <p class="step-description">
+                Log in to your my.sdsu account and navigate to the degree evaluation section. You'll find this under the Academic Tools menu.
+            </p>
+            <img src="https://mqnkwoayeimfomfmsows.supabase.co/storage/v1/object/public/newsletter-images/1758739861132_w464klli9_whatif_1.png" alt="Step 1 - Access degree evaluation" class="step-image">
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h2 class="step-title">Click on the "What If" Audit button</h2>
+            <p class="step-description">
+                Look for the "What If" button in your degree evaluation interface. This will open the audit tool where you can explore different academic pathways.
+            </p>
+            <img src="https://mqnkwoayeimfomfmsows.supabase.co/storage/v1/object/public/newsletter-images/1758739880766_y402nh3bt_whatif_3.png" alt="Step 2 - Click What If Audit button" class="step-image">
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h2 class="step-title">Select your desired major or minor</h2>
+            <p class="step-description">
+                Choose the major or minor you're interested in exploring from the dropdown menu. You can run multiple scenarios to compare different options.
+            </p>
+            <img src="https://mqnkwoayeimfomfmsows.supabase.co/storage/v1/object/public/newsletter-images/1758739889398_6ep77k9q0_whatif_4.png" alt="Step 3 - Select major or minor" class="step-image">
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <h2 class="step-title">Review your results</h2>
+            <p class="step-description">
+                Analyze the audit results to see which requirements you've already completed and what courses you still need. Use this information to make informed decisions about your academic path.
+            </p>
+            <img src="https://mqnkwoayeimfomfmsows.supabase.co/storage/v1/object/public/newsletter-images/1758739912015_yt5nhkk7c_whatif_6.png" alt="Step 4 - Review audit results" class="step-image">
+        </div>
+    </div>
+</body>
+</html>

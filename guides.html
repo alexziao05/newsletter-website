@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Guides - SDSU Newsletter</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            padding-top: 64px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(166, 25, 46, 0.2);
+            color: #A6192E;
+        }
+
+        .nav-link.active {
+            background: #A6192E;
+            color: #ffffff;
+        }
+
+        .guides-hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .guides-hero h1 {
+            color: #A6192E;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .guides-hero p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .guides-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .guide-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .guide-card-header {
+            background: linear-gradient(135deg, #A6192E 0%, #8B1538 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .guide-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .guide-card-body {
+            padding: 2rem;
+        }
+
+        .guide-card-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-card-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .guide-card-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .guide-card-features li::before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .guide-card-footer {
+            padding: 1.5rem 2rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .guide-card-cta {
+            color: #A6192E;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .guide-card-cta::after {
+            content: "→";
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .guide-card:hover .guide-card-cta::after {
+            transform: translateX(4px);
+        }
+
+        .coming-soon-badge {
+            background: #ffc107;
+            color: #856404;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            margin-left: auto;
+            margin-top: 1rem;
+        }
+
+        .available-badge {
+            background: #28a745;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            margin-left: auto;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .guides-hero {
+                padding: 2rem 1rem;
+            }
+
+            .guides-hero h1 {
+                font-size: 2rem;
+            }
+
+            .guides-container {
+                padding: 2rem 1rem;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .guide-card-header,
+            .guide-card-body,
+            .guide-card-footer {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-logo">
+            <img src="assets/sdsu_banner.jpg" alt="SDSU">
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="guides.html" class="nav-link active">Guides</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="guides-hero">
+        <h1>Student Guides</h1>
+        <p>Comprehensive guides to help you navigate your academic journey at SDSU</p>
+    </section>
+
+    <!-- Guides Grid -->
+    <div class="guides-container">
+        <div class="guides-grid">
+            <!-- What If Audit Guide Card -->
+            <a href="whatifaudit.html" class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">🔍</div>
+                    <h3 class="guide-card-title">What If Audit</h3>
+                </div>
+                <div class="guide-card-body">
+                    <p class="guide-card-description">
+                        Learn how to explore different majors and minors using SDSU's "What If" audit tool. Perfect for students considering a change or exploring their options.
+                    </p>
+                    <ul class="guide-card-features">
+                        <li>Step-by-step tutorial</li>
+                        <li>Common troubleshooting tips</li>
+                        <li>Screenshots and examples</li>
+                        <li>FAQ section</li>
+                    </ul>
+                </div>
+                <div class="guide-card-footer">
+                    <div class="guide-card-cta">Start Learning</div>
+                </div>
+            </a>
+
+            <!-- What If Audit Guide Card -->
+            <a href="whatifaudit.html" class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">🔍</div>
+                    <h3 class="guide-card-title">What If Audit</h3>
+                </div>
+                <div class="guide-card-body">
+                    <p class="guide-card-description">
+                        Learn how to explore different majors and minors using SDSU's "What If" audit tool. Perfect for students considering a change or exploring their options.
+                    </p>
+                    <ul class="guide-card-features">
+                        <li>Step-by-step tutorial</li>
+                        <li>Common troubleshooting tips</li>
+                        <li>Screenshots and examples</li>
+                        <li>FAQ section</li>
+                    </ul>
+                </div>
+                <div class="guide-card-footer">
+                    <div class="guide-card-cta">Start Learning</div>
+                </div>
+            </a>
+
+            <!-- What If Audit Guide Card -->
+            <a href="whatifaudit.html" class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">🔍</div>
+                    <h3 class="guide-card-title">What If Audit</h3>
+                </div>
+                <div class="guide-card-body">
+                    <p class="guide-card-description">
+                        Learn how to explore different majors and minors using SDSU's "What If" audit tool. Perfect for students considering a change or exploring their options.
+                    </p>
+                    <ul class="guide-card-features">
+                        <li>Step-by-step tutorial</li>
+                        <li>Common troubleshooting tips</li>
+                        <li>Screenshots and examples</li>
+                        <li>FAQ section</li>
+                    </ul>
+                </div>
+                <div class="guide-card-footer">
+                    <div class="guide-card-cta">Start Learning</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
